@@ -34,6 +34,33 @@ public class Deck : MonoBehaviour
          * En principio, la posición de cada valor se deberá corresponder con la posición de faces. 
          * Por ejemplo, si en faces[1] hay un 2 de corazones, en values[1] debería haber un 2.
          */
+        int n = 0;
+        //mientras n no sea 52
+        while (n != faces.Length)
+        {
+            //para crear los cuatro palos
+            for (int j = 1; j <= 4; j++)
+            {
+                //para crear las cuatro cartas
+                for (int i = 1; i <= 13; i++)
+                {
+                    //1-10 tienen su numero
+                    if (i <= 10)
+                    {
+                        values[n] = i;
+                        n++;
+                    }
+                    //las figuras valen diez
+                    else
+                    {
+                        values[n] = 10;
+                        n++;
+                    }
+                }
+            }
+        }
+        
+
     }
 
     private void ShuffleCards()
