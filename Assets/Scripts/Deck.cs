@@ -13,7 +13,7 @@ public class Deck : MonoBehaviour
     public Button playAgainButton;
     public Text finalMessage;
     public Text probMessage;
-
+    private bool isStanded = false;
     public int[] values = new int[52];
     int cardIndex = 0;    
        
@@ -88,6 +88,7 @@ public class Deck : MonoBehaviour
 
     void StartGame()
     {
+        isStanded = false;
         for (int i = 0; i < 2; i++)
         {
             PushPlayer();
@@ -144,31 +145,54 @@ public class Deck : MonoBehaviour
         /*TODO: 
          * Si estamos en la mano inicial, debemos voltear la primera carta del dealer.
          */
-        
-        //Repartimos carta al jugador
-        PushPlayer();
-
-        /*TODO:
-         * Comprobamos si el jugador ya ha perdido y mostramos mensaje
-         */
-        if (player.GetComponent<CardHand>().points > 21)
+        if (isStanded == false)
         {
-            finalMessage.text = "Has perdido, vuelve a intentarlo";
+            //Repartimos carta al jugador
+            PushPlayer();
+
+            /*TODO:
+             * Comprobamos si el jugador ya ha perdido y mostramos mensaje
+             */
+            if (player.GetComponent<CardHand>().points > 21)
+            {
+                finalMessage.text = "Has perdido, vuelve a intentarlo";
+            }
         }
+       
     }
 
     public void Stand()
     {
+        isStanded = true;
         /*TODO: 
          * Si estamos en la mano inicial, debemos voltear la primera carta del dealer.
          */
-
+        if (dealer.GetComponent<CardHand>().cards.Count == 2)
+        {
+            dealer.GetComponent<CardHand>().cards[0].GetComponent<CardModel>().ToggleFace(true);
+        }
         /*TODO:
          * Repartimos cartas al dealer si tiene 16 puntos o menos
          * El dealer se planta al obtener 17 puntos o más
          * Mostramos el mensaje del que ha ganado
-         */                
-         
+         */
+        while (dealer.GetComponent<CardHand>().points <= 16)
+        {
+            PushDealer();
+        }
+        if(dealer.GetComponent<CardHand>().points < player.GetComponent<CardHand>().points || dealer.GetComponent<CardHand>().points>21)
+        {
+            finalMessage.text = "Has ganado, enhorabuena";
+        }
+        else if(dealer.GetComponent<CardHand>().points > player.GetComponent<CardHand>().points)
+        {
+            finalMessage.text = "Has perdido, vuelve a intentarlo";
+        }
+        else
+        {
+            finalMessage.text = "Has empatado, vuelve a intentarlo";
+
+        }
     }
 
     public void PlayAgain()
