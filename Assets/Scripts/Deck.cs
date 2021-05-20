@@ -95,6 +95,14 @@ public class Deck : MonoBehaviour
             /*TODO:
              * Si alguno de los dos obtiene Blackjack, termina el juego y mostramos mensaje
              */
+            if (dealer.GetComponent<CardHand>().points == 21)
+            {
+                finalMessage.text = "Has perdido, vuelve a intentarlo";
+            }
+            if (player.GetComponent<CardHand>().points == 21)
+            {
+                finalMessage.text = "Has ganado, enhorabuena";
+            }
         }
     }
 
@@ -106,6 +114,10 @@ public class Deck : MonoBehaviour
          * - Probabilidad de que el jugador obtenga entre un 17 y un 21 si pide una carta
          * - Probabilidad de que el jugador obtenga más de 21 si pide una carta          
          */
+        int puntosPlayer =player.GetComponent<CardHand>().points;
+        int puntosDealer = player.GetComponent<CardHand>().points;
+
+
     }
 
     void PushDealer()
@@ -138,8 +150,11 @@ public class Deck : MonoBehaviour
 
         /*TODO:
          * Comprobamos si el jugador ya ha perdido y mostramos mensaje
-         */      
-
+         */
+        if (player.GetComponent<CardHand>().points > 21)
+        {
+            finalMessage.text = "Has perdido, vuelve a intentarlo";
+        }
     }
 
     public void Stand()
