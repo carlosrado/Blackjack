@@ -109,12 +109,13 @@ public class Deck : MonoBehaviour
             {
                 finalMessage.text = "Has perdido, vuelve a intentarlo";
                 isFinished = true;
+                dealer.GetComponent<CardHand>().cards[0].GetComponent<CardModel>().ToggleFace(true);
             }
             if (player.GetComponent<CardHand>().points == 21)
             {
                 finalMessage.text = "Has ganado, enhorabuena";
                 isFinished = true;
-
+                dealer.GetComponent<CardHand>().cards[0].GetComponent<CardModel>().ToggleFace(true);
             }
         }
     }
