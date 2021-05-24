@@ -136,21 +136,27 @@ public class Deck : MonoBehaviour
             int puntosDealer=dealer.GetComponent<CardHand>().cards[1].GetComponent<CardModel>().value;
             int puntosPlayer = player.GetComponent<CardHand>().points;
             int puntosNecesarios = puntosPlayer - puntosDealer;
+            
             for(int i = cardIndex; i< values.Length; i++)
             {
+                int aux = values[i];
+                if (values[i] == 11 && values[i] + puntosPlayer > 21)
+                {
+                    aux= 1;
+                }
                 //probabilidad de que el dealer tenga más puntuación que el jugador
-                if (values[i] > puntosNecesarios)
+                if (aux > puntosNecesarios)
                 {
                     casosFavorables_1++;
 
                 }
                 //Probabilidad de que el jugador obtenga entre un 17 y un 21 si pide una carta
-                if ((values[i] + puntosPlayer) >= 17 && (values[i] + puntosPlayer) <= 21)
+                if ((aux + puntosPlayer) >= 17 && (aux + puntosPlayer) <= 21)
                 {
                     casosFavorables_2++;
                 }
                 //Probabilidad de que el jugador obtenga más de 21 si pide una carta
-                if (values[i] + puntosPlayer == 21)
+                if (aux + puntosPlayer == 21)
                 {
                     casosFavorables_3++;
 
