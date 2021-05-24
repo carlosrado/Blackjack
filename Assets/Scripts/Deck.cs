@@ -156,7 +156,7 @@ public class Deck : MonoBehaviour
                     casosFavorables_2++;
                 }
                 //Probabilidad de que el jugador obtenga más de 21 si pide una carta
-                if (aux + puntosPlayer == 21)
+                if (aux + puntosPlayer > 21)
                 {
                     casosFavorables_3++;
 
