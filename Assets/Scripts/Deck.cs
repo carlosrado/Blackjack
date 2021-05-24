@@ -172,6 +172,7 @@ public class Deck : MonoBehaviour
          */
         dealer.GetComponent<CardHand>().Push(faces[cardIndex],values[cardIndex]);
         cardIndex++;
+        if(cardIndex==4)
         CalculateProbabilities();
 
     }
