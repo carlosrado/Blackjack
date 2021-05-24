@@ -47,16 +47,22 @@ public class Deck : MonoBehaviour
                 //para crear las cuatro cartas
                 for (int i = 1; i <= 13; i++)
                 {
-                    //1-10 tienen su numero
-                    if (i <= 10)
+                    //as vale 11
+                    if (i == 1)
                     {
-                        values[n] = i;
+                        values[n] = 11;
                         n++;
                     }
                     //las figuras valen diez
-                    else
+                    else if(i>10)
                     {
                         values[n] = 10;
+                        n++;
+                    }
+                    //2-10 tienen su numero
+                    else
+                    {
+                        values[n] = i;
                         n++;
                     }
                 }
